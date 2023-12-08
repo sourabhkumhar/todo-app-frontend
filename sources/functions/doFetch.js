@@ -1,7 +1,9 @@
 export const host =
-  process.env.NODE_ENV === "development" ? "http://localhost:1000" : "";
+  process.env.NODE_ENV === "development"
+    ? "http://localhost:1000"
+    : "https://todo-app-backend-api.vercel.app";
 
-// Fetch Hook (only for beatstore api)
+// Fetch function
 const doFetch = async (path, method, body, options = {}) => {
   try {
     const res = await fetch(`${host}/api/${path}`, {
