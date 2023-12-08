@@ -5,17 +5,21 @@ export const host =
 
 // Fetch function
 const doFetch = async (path, method, body, options = {}) => {
+  const token = localStorage.getItem("token");
   try {
-    const res = await fetch(`${host}/api/${path}`, {
-      ...options,
-      method: method || "GET",
-      body: typeof body === "object" ? JSON.stringify(body) : body,
-      credentials: options.credentials || "include",
-      headers: {
-        ...options.headers,
-        "Content-Type": "application/json",
-      },
-    });
+    const res = await fetch(
+      `${host}/api/${path}${token ? `?token=${token}` : ""}`,
+      {
+        ...options,
+        method: method || "GET",
+        body: typeof body === "object" ? JSON.stringify(body) : body,
+        credentials: options.credentials || "include",
+        headers: {
+          ...options.headers,
+          "Content-Type": "application/json",
+        },
+      }
+    );
     const response = await res.json();
 
     return response;

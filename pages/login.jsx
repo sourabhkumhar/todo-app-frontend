@@ -35,6 +35,8 @@ const LoginPage = () => {
       data: resp.data,
     });
 
+    localStorage.setItem("token", resp.token);
+
     toast.success(resp.message);
     Router.push("/");
   };
